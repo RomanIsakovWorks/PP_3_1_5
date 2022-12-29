@@ -10,14 +10,19 @@
 
     <th:block th:each="user : ${allUsers}">
         <h1 th:text="${user}"></h1>
-        <a th:href="@{/users/editUser(id = ${user.getId()})}"><button>Update User</button></a>
-        <a th:href="@{/users/deleteUser(id = ${user.getId()})}"><button>Delete User</button></a>
+        <a th:href="@{/admin/editUser(id = ${user.getId()})}"><button>Update User</button></a>
+        <a th:href="@{/admin/deleteUser(id = ${user.getId()})}"><button>Delete User</button></a>
     </th:block>
 
     <br/>
     <hr/>
 
-    <a href="/users/addUser"><button>Add user</button> </a>
+    <a href="/admin/addUser"><button>Add user</button> </a>
+
+    <br/>
+    <hr/>
+
+    <a href="/logout"><button>Logout</button> </a>
 </div>
 </body>
 </html>

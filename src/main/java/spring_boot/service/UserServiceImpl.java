@@ -1,5 +1,8 @@
 package spring_boot.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import spring_boot.dao.UserDao;
 import spring_boot.model.User;
 import org.springframework.stereotype.Service;
@@ -9,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDao userDao;
 
@@ -45,6 +48,30 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public Object getUser(int id) {
         return userDao.getUser(id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userDao.findByUsername(username);
+
+        if(user == null)
+            throw new UsernameNotFoundException("User not found!");
+
+       UserDetails userDetails = org.springframework.security.core.userdetails.User
+               .builder()
+               .username(user.getUsername())
+               .password(user.getPassword())
+               .authorities(user.getAuthorities())
+               .build();
+
+       return userDetails;
     }
 
 }
