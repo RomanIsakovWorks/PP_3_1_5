@@ -41,6 +41,15 @@ public class User<joinColumns, inverseJoinColumns> implements UserDetails {
 
     public User() {}
 
+    public User(String name, String lastName, String email, String username, String password, List<Role> roles) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public User(String name, String lastName, String email) {
         this.name = name;
         this.lastName = lastName;
@@ -149,10 +158,13 @@ public class User<joinColumns, inverseJoinColumns> implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
 }

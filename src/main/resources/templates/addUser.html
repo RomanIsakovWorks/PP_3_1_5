@@ -20,6 +20,29 @@
     <input type="text" th:field="*{email}" id="email"/>
 
     <br/>
+    <br/>
+
+    <label for="username">Enter username: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+
+    <label for="password">Enter new password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+
+<!--    <label for="role">Select role</label>-->
+<!--    <select th:field="*{roles}" type="text" id="role">-->
+<!--        <option th:each="role : ${roles}" th:value="${role.getId()}" th:text="${role.getRole()}"></option>-->
+<!--    </select>-->
+
+    <label for="rolesList">input role: </label>
+    <select th:field="*{roles}" name="rolesList" id="rolesList" >
+        <option th:each="role : ${roles}"
+                th:value="${role}"
+                th:text="${role}">
+        </option>
+    </select>
+
+    <br/>
+    <br/>
 
     <input type="submit" value="Add"/>
 

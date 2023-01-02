@@ -3,6 +3,7 @@ package spring_boot.controller;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import spring_boot.model.User;
+import spring_boot.service.RoleService;
 import spring_boot.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService, UserDetailsService userDetailsService, UserServiceImpl userServiceImpl) {
+    public UserController(UserService userService, UserDetailsService userDetailsService, UserServiceImpl userServiceImpl, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/admin")
@@ -27,7 +30,9 @@ public class UserController {
     }
 
     @GetMapping("/admin/addUser")
-    public String createNewUser(@ModelAttribute("user") User user) {
+    public String createNewUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "addUser";
     }
 
@@ -40,6 +45,7 @@ public class UserController {
     @GetMapping("/admin/editUser")
     public String editUser(Model model, @RequestParam int id) {
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("roles", roleService.getAllRoles());
         return "editUser";
     }
 
