@@ -1,10 +1,11 @@
 package spring_boot.service;
 
 import org.springframework.stereotype.Service;
-import spring_boot.dao.RoleRepository;
 import spring_boot.model.Role;
+import spring_boot.repositories.RoleRepository;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -16,8 +17,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public Set<Role> getAllRoles() {
+        return new HashSet<Role>(roleRepository.findAll());
     }
 
 }

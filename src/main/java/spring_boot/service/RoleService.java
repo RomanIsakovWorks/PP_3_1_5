@@ -1,9 +1,8 @@
 package spring_boot.service;
 
 import spring_boot.model.Role;
-
-import java.util.List;
+import java.util.Set;
 
 public interface RoleService {
-    public List<Role> getAllRoles();
+    public Set<Role> getAllRoles();
 }

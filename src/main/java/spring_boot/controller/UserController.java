@@ -24,16 +24,20 @@ public class UserController {
     }
 
     @GetMapping("/admin")
-    public String showAllUsers(Model model) {
+    public String showAllUsers(Model model, Principal principal) {
+        User userAdmin = userService.findByEmail(principal.getName());
+        model.addAttribute("userAdmin", userAdmin);
         model.addAttribute("allUsers", userService.getListUsers());
-        return "users";
+        model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("newUser", new User());
+        return "adminPage";
     }
 
     @GetMapping("/admin/addUser")
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRoles());
-        return "addUser";
+        return "redirect:/admin";
     }
 
     @PostMapping("/admin")
@@ -46,7 +50,7 @@ public class UserController {
     public String editUser(Model model, @RequestParam int id) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("roles", roleService.getAllRoles());
-        return "editUser";
+        return "redirect:/admin";
     }
 
     @PostMapping("/admin/editUser")
@@ -63,8 +67,8 @@ public class UserController {
 
     @GetMapping("/user")
     public String showUser(Model model, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
-        return "user";
+        return "userPage";
     }
 }
