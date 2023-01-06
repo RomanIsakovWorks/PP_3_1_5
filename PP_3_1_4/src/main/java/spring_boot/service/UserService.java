@@ -1,17 +1,17 @@
-package spring_boot.dao;
-
+package spring_boot.service;
 
 import spring_boot.model.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
 
     List<User> getListUsers();
 
     void addUser(User user);
     void deleteUser(int id);
     void updateUser(int id, User user);
-    User getUser(int id);
-    public User findByUsername(String username);
+    Object getUser(int id);
+    public User findByEmail(String email);
+
 }
