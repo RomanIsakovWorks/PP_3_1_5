@@ -1,5 +1,6 @@
 package spring_boot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Long.class)
 public class Role implements GrantedAuthority {
 
     @Id
@@ -18,6 +20,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 

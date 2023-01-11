@@ -10,8 +10,8 @@ public interface UserService {
 
     void addUser(User user);
     void deleteUser(int id);
-    void updateUser(int id, User user);
-    Object getUser(int id);
-    public User findByEmail(String email);
+    User getUser(int id);
+    User findByEmail(String email);
+    void updateUser(User user);
 
 }

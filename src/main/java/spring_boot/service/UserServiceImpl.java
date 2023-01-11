@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import spring_boot.repositories.UserRepository;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,15 +34,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(int id, User user) {
-        user.setId(id);
+    public void updateUser(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public Object getUser(int id) {
-        Optional<User> foundUser = userRepository.findById(id);
-        return foundUser.orElse(null);
+    public User getUser(int id) {
+        return userRepository.findById(id).get();
     }
 
     @Override

@@ -11,8 +11,8 @@
 	<groupId>Spring_boot</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>PP_3_1_4</name>
-	<description>PP_3_1_4_Spring Security_Bootstrap</description>
+	<name>PP_3_1_5</name>
+	<description>PP_3_1_5_JS</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
